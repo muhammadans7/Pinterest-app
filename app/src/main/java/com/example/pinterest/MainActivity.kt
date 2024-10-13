@@ -18,21 +18,26 @@ class MainActivity : ComponentActivity() {
             PinterestTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
                     var isLoggedIn by remember { mutableStateOf(false) }
-                    var loginMessage by remember { mutableStateOf("") } //hold the login message
-                    var username by remember { mutableStateOf("") } //hold the username
-
-                    // Display the message
+                    var loginMessage by remember { mutableStateOf("") }
+                    var username by remember { mutableStateOf("") }
                     if (isLoggedIn) {
-                        ProfileScreen(username = username)
+                        ProfileScreen(
+                            username = username,
+                            onEditProfileClick = {
+
+                                isLoggedIn = false
+                                loginMessage = ""
+                            }
+                        )
                     } else {
                         LoginScreen(
                             onLoginSuccess = { success ->
                                 isLoggedIn = success
                                 if (success) {
-                                    username = "jonsnow"
-                                    loginMessage = "Login Successful!"
+                                    username = "Jon snow"
+                                    loginMessage = "Login successful!"
                                 } else {
-                                    loginMessage = ""
+                                    loginMessage = "Login failed"
                                 }
                             },
                             loginMessage = loginMessage

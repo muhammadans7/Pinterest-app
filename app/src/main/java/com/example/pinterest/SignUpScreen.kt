@@ -1,4 +1,5 @@
 package com.example.pinterest
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -6,6 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SignUpScreen(onSignUpSuccess: () -> Unit) {
@@ -25,6 +29,24 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.pinterest_logo),
+                    contentDescription = "Pinterest Logo",
+                    modifier = Modifier.size(100.dp)
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Welcome to Pinterest, where your ideas and inspirations come to life.",
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // Sign Up Title
                 Text(text = "Sign Up", style = MaterialTheme.typography.headlineMedium)
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -57,7 +79,6 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Confirm Password input field
                 TextField(
                     value = confirmPassword,
                     onValueChange = { confirmPassword = it },
@@ -76,7 +97,7 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                     onClick = {
                         if (username.isNotBlank() && password.isNotBlank() && password == confirmPassword) {
                             signUpSuccessful = true
-                            onSignUpSuccess() // Navigate back to Login screen on success
+                            onSignUpSuccess()
                         }
                     },
                     modifier = Modifier.fillMaxWidth()
@@ -84,11 +105,31 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                     Text(text = "Sign Up")
                 }
 
-                // Feedback message
+                //Google button
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = {
+
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4285F4)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Continue with Google", color = Color.White)
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 if (signUpSuccessful) {
                     Text(text = "Sign Up Successful", color = MaterialTheme.colorScheme.primary)
                 }
             }
         }
     )
+}
+
+@Preview
+@Composable
+fun SignUpScreenPreview() {
+    SignUpScreen(onSignUpSuccess = {})
 }

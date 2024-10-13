@@ -1,15 +1,17 @@
 package com.example.pinterest
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProfileScreen(username: String) {
+fun ProfileScreen(username: String, onEditProfileClick: () -> Unit) {
     Scaffold(
         containerColor = Color.White,
         content = { innerPadding ->
@@ -22,24 +24,55 @@ fun ProfileScreen(username: String) {
                 horizontalAlignment = Alignment.Start
             ) {
                 item {
-                    Text(text = "Profile", style = MaterialTheme.typography.headlineMedium)
+                    Image(
+                        painter = painterResource(id = R.drawable.pinterest_logo),
+                        contentDescription = "Pinterest Logo",
+                        modifier = Modifier.size(100.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = username,
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = Color.Black
+                    )
+                    Text(
+                        text = "youknownothing@gmail.com",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.Gray
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = "0 followers • 0 following",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.Gray
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(
+                        onClick = { onEditProfileClick() },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Gray),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(text = "EDIT PROFILE")
+                    }
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Profile Information
-                    Text(text = "Username: $username", style = MaterialTheme.typography.bodyLarge)
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "Email: youknownothing@gmail.com", style = MaterialTheme.typography.bodyLarge) // Placeholder for email
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "Bio : Crafting stories through visuals, one pin at a time", style = MaterialTheme.typography.bodyLarge)
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        text = "Your Pins",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = Color.Black
+                    )
 
-                    Text(text = "Jon Snow Pins", style = MaterialTheme.typography.headlineSmall)
                     Spacer(modifier = Modifier.height(16.dp))
                 }
 
 
-                for (i in 1..8) { // Displaying the all pins
+                for (i in 1..8) {
                     item {
                         Card(
                             modifier = Modifier
@@ -50,9 +83,16 @@ fun ProfileScreen(username: String) {
                             Column(
                                 modifier = Modifier.padding(16.dp)
                             ) {
-                                Text(text = "Pin Item #$i", style = MaterialTheme.typography.bodyLarge)
-                                Text(text = "\"A curated collection of ideas and inspirations, where creativity meets endless possibilities. Dive into a world of design, art, and imagination.\"\n" +
-                                        "\n ", style = MaterialTheme.typography.bodySmall)
+                                Text(
+                                    text = "Pin Item #$i",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = Color.Black
+                                )
+                                Text(
+                                    text = "\"A curated collection of ideas and inspirations, where creativity meets endless possibilities. Dive into a world of design, art, and imagination.\"",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = Color.Gray
+                                )
                             }
                         }
                     }

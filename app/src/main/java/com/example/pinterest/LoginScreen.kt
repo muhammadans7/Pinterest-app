@@ -12,11 +12,10 @@ fun LoginScreen(onLoginSuccess: (Boolean) -> Unit, loginMessage: String) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showSignUp by remember { mutableStateOf(false) }
-    var loginAttempted by remember { mutableStateOf(false) } // Track if login was attempted
-
-    // If showSignUp is true, display Sign Up screen
+    var loginAttempted by remember { mutableStateOf(false) }
+//    display Sign Up screen
     if (showSignUp) {
-        SignUpScreen(onSignUpSuccess = { showSignUp = false }) // Navigate back to Login on success
+        SignUpScreen(onSignUpSuccess = { showSignUp = false })
     } else {
         Scaffold(
             containerColor = Color.White,
@@ -33,7 +32,7 @@ fun LoginScreen(onLoginSuccess: (Boolean) -> Unit, loginMessage: String) {
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Username input field
+                    // Username field
                     TextField(
                         value = username,
                         onValueChange = { username = it },
@@ -47,7 +46,6 @@ fun LoginScreen(onLoginSuccess: (Boolean) -> Unit, loginMessage: String) {
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Password input field
                     TextField(
                         value = password,
                         onValueChange = { password = it },
@@ -64,11 +62,11 @@ fun LoginScreen(onLoginSuccess: (Boolean) -> Unit, loginMessage: String) {
                     // Login button
                     Button(
                         onClick = {
-                            loginAttempted = true // Set the login attempt flag
+                            loginAttempted = true
                             if (username.isNotBlank() && password.isNotBlank()) {
-                                onLoginSuccess(true) // Call the success callback
+                                onLoginSuccess(true)
                             } else {
-                                onLoginSuccess(false) // Handle unsuccessful login
+                                onLoginSuccess(false)
                             }
                         },
                         modifier = Modifier.fillMaxWidth()
@@ -76,13 +74,12 @@ fun LoginScreen(onLoginSuccess: (Boolean) -> Unit, loginMessage: String) {
                         Text(text = "Login")
                     }
 
-                    // Feedback message
                     if (loginAttempted) {
                         if (loginMessage.isNotEmpty()) { // Display the login message if it's not empty
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(text = loginMessage, color = MaterialTheme.colorScheme.primary)
                         } else {
-                            // Optionally display an error message for unsuccessful login
+
                             Text(text = "Please enter valid credentials.", color = MaterialTheme.colorScheme.error)
                         }
                     }
