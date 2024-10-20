@@ -17,6 +17,7 @@ fun LoginScreen(onLoginSuccess: (Boolean) -> Unit, loginMessage: String) {
     if (showSignUp) {
         SignUpScreen(onSignUpSuccess = { showSignUp = false })
     } else {
+
         Scaffold(
             containerColor = Color.White,
             content = { innerPadding ->

@@ -62,6 +62,9 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.2.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
